@@ -1,0 +1,42 @@
+function srs_forward($localpart, $domain, $opts = [])
+{
+	$secret = $opts["secret"] ?? "";
+	$hashlen = $opts["hashlen"] ?? 4;
+
+	$days = floor(time() / 86400);
+	$base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+	$time = $base32[floor($days / 32) & 31].$base32[$days & 31];
+	$key = base64_encode(pack("H*", hmac_sha1($secret, str_lower($time.$domain.$localpart))));    
+	return "SRS0=".$key[0:$hashlen]."=$time=".$domain."=".$localpart;
+}
+
+function srs_reverse($localpart, $opts = [])
+{
+	$secret = $opts["secret"] ?? "";
+	$hashlen = $opts["hashlen"] ?? 4;
+	$maxage = $opts["maxage"] ?? 21;
+
+	if (str_lower($localpart[0:5]) != "srs0=") return;
+	$part = explode("=", $localpart, 5);
+	if (length($part) != 5) return;
+
+	$key = base64_encode(pack("H*", hmac_sha1($secret, str_lower($part[2].$part[3].$part[4]))));
+	if (str_lower($key[0:$hashlen]) != str_lower($part[1])) return;
+
+	if (length($part[2]) != 2) return;
+	$days = 0;
+	$base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+	$i = 0;
+	while ($i <= 1)
+	{
+		$pos = str_find($base32, str_upper($part[2])[$i]);
+		if ($pos == -1) return;
+		$days = $days * length($base32) + $pos;
+		$i += 1;
+	}
+	$now = floor(time() / 86400) % (32 ** 2);
+	if ($now < $days) $now += (32 ** 2);
+	if ($now > $days + $maxage) return;
+
+	return ["localpart" => $part[4], "domain" => $part[3]];
+}
