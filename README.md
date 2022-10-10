@@ -1,6 +1,28 @@
+# SRS - Sender Sewrite Scheme
+
 This example provides a [Mail::SRS](http://search.cpan.org/perldoc?Mail::SRS) compatible sender rewrite scheme implementation, our [documentation](https://support.halon.io/hc/en-us/articles/360001368529) shows how to implement it properly.
 
-## srs_forward(localpart, domain, opts)
+## Installation
+
+Follow the [instructions](https://docs.halon.io/manual/comp_install.html#installation) in our manual to add our package repository and then run the below command.
+
+### Ubuntu
+
+```
+apt-get install halon-extras-srs
+```
+
+### RHEL
+
+```
+yum install halon-extras-srs
+```
+
+## Exported functions
+
+These functions needs to be [imported](https://docs.halon.io/hsl/structures.html#import) from the `extras://srs` module path.
+
+### srs_forward(localpart, domain, opts)
 
 Apply the SRS forward scheme to an address
 
@@ -17,7 +39,7 @@ The following options are available in the **opts** array.
 - secret `string` - A secret. The default is an empty secret.
 - hashlen `number` - Number of charaters to include from the secret hash. The default is 4.
 
-## srs_reverse(localpart, opts)
+### srs_reverse(localpart, opts)
 
 Apply the SRS forward scheme to an local part
 
