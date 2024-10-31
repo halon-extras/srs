@@ -1,4 +1,4 @@
-# SRS - Sender Sewrite Scheme
+# SRS - Sender Rewrite Scheme
 
 This example provides a [Mail::SRS](http://search.cpan.org/perldoc?Mail::SRS) compatible sender rewrite scheme implementation, our [documentation](https://docs.halon.io/kb/miscellaneous/sender-rewriting-scheme) shows how to implement it properly.
 
