@@ -1,0 +1,24 @@
+import { srs_forward, srs_reverse } from "file://srs.hsl";
+
+$s0p = srs_forward("usera", "hosta.com", [
+    "secret" => "secret"
+]);
+echo $s0p."@hostb.com";
+$s1p = srs_forward($s0p, "hostb.com", [
+    "secret" => "secret"
+]);
+echo $s1p."@hostc.com";
+$s1p2 = srs_forward($s1p, "hostc.com", [
+    "secret" => "secret"
+]);
+echo $s1p2."@hostd.com";
+
+$s1r = srs_reverse($s1p2, [
+    "secret" => "secret"
+]);
+echo $s1r["localpart"]."@".$s1r["domain"];
+
+$s0r = srs_reverse($s1r["localpart"], [
+    "secret" => "secret"
+]);
+echo $s0r["localpart"]."@".$s0r["domain"];
