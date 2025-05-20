@@ -19,6 +19,8 @@ RUN apt-get -y update && apt-get -y install halon=6.6.2
 RUN /usr/bin/install -d /var/run/halon
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
-RUN apt-get install -y supervisor git
+RUN apt-get install -y supervisor git make
+RUN yes | cpan Mail::SRS
 COPY .devcontainer/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 CMD ["/usr/bin/supervisord"]

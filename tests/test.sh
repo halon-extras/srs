@@ -1,10 +1,9 @@
 #!/bin/sh
 
-# install Mail::SRS
-# apt-get install -y make
-# yes | cpan Mail::SRS
-
 set -e
 
+echo "--- HSL"
 hsh --rootpath .. test.hsl
+
+echo "--- Perl"
 LANG="" perl test.pl
