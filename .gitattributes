@@ -1,1 +1,5 @@
 CMakeLists.txt linguist-vendored
+.devcontainer/Dockerfile linguist-vendored
+.devcontainer/entrypoint.sh linguist-vendored
+tests/test.pl
+tests/test.sh
