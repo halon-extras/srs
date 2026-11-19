@@ -37,7 +37,7 @@ Apply the SRS forward scheme to an address
 The following options are available in the **opts** array.
 
 - secret `string` - A secret. The default is an empty secret.
-- hashlen `number` - Number of charaters to include from the secret hash. The default is 4.
+- hashlen `number` - Number of characters to include from the secret hash. The default is 4.
 - time `number` - The current time. The default is now.
 
 ### srs_reverse(localpart, opts)
@@ -49,11 +49,11 @@ Apply the SRS forward scheme to an local part
 - localpart `string` - The email localpart
 - opts `array` - options array
 
-**Returns**: An `array` containg the `localpart` and the `domain` of the SRS reversed address. On error `none` is returned.
+**Returns**: An `array` containing the `localpart` and the `domain` of the SRS reversed address. On error `none` is returned.
 
 The following options are available in the **opts** array.
 
 - secret `string` - A secret. The default is an empty secret.
-- hashlen `number` - Number of charaters to include from the secret hash. The default is 4.
+- hashlen `number` - Number of characters to include from the secret hash. The default is 4.
 - time `number` - The current time. The default is now.
 - maxage `number` - Number of days the SRS address should be valid. The default is 21 days.
